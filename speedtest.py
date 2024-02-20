@@ -35,7 +35,7 @@ def serve(server_class=http.server.HTTPServer, handler_class=Handler):
 
 def run_speedtest():
     while True:
-        speedtest_results = json.loads(os.popen("speedtest -fjson").read())
+        speedtest_results = json.loads(os.popen("speedtest --accept-license --accept-gdpr -fjson").read())
 
         speedtest_results = {
             k: v

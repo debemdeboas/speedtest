@@ -11,10 +11,6 @@ RUN apt install -y speedtest && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 80
 
-# Accept the license agreements
-# RUN bash -c "timeout 5 speedtest < <(echo -e 'YES\nYES')"
-RUN timeout 5 speedtest --accept-license --accept-gdpr || exit 0
-
 WORKDIR /app
 COPY speedtest.py /app/
 
