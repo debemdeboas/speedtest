@@ -9,6 +9,8 @@ RUN apt update && apt install -y \
 RUN curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | bash
 RUN apt install -y speedtest && rm -rf /var/lib/apt/lists/*
 
+EXPOSE 80
+
 # Accept the license agreements
 # RUN bash -c "timeout 5 speedtest < <(echo -e 'YES\nYES')"
 RUN timeout 5 speedtest --accept-license --accept-gdpr || exit 0

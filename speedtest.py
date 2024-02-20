@@ -5,7 +5,10 @@ import os
 import sys
 import time
 
+HTTP_PORT = 80
 MAX_RESULTS = 5
+SPEEDTEST_TEST_INTERVAL = 5 * 60  # every 5 minutes
+
 manager = mp.Manager()
 results = manager.list()
 current = manager.Value("i", 0)
@@ -25,7 +28,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
 
 def serve(server_class=http.server.HTTPServer, handler_class=Handler):
-    server_address = ("", 8080)
+    server_address = ("", HTTP_PORT)
     httpd = server_class(server_address, handler_class)
     httpd.serve_forever()
 
@@ -50,7 +53,7 @@ def run_speedtest():
             results.pop(0)
         results.append(speedtest_results)
 
-        time.sleep(5 * 60)
+        time.sleep(SPEEDTEST_TEST_INTERVAL)
 
 
 if __name__ == "__main__":
